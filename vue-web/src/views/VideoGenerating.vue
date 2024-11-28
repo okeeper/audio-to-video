@@ -115,6 +115,7 @@ import {
   RefreshRight,
   VideoPlay
 } from '@element-plus/icons-vue'
+import { getConfig } from '@/config'
 
 const router = useRouter()
 const videoStore = useVideoStore()
@@ -159,10 +160,11 @@ const generateVideo = async () => {
     })
     
     if (data.preview_url) {
-      videoUrl.value = data.preview_url
+      // 这里加上后端baseURL
+      videoUrl.value = getConfig().apiBaseUrl + data.preview_url
     }
     if (data.preview_image_url) {
-      previewImageUrl.value = data.preview_image_url
+      previewImageUrl.value = getConfig().apiBaseUrl + data.preview_image_url
     }
     
     progress.value = 100

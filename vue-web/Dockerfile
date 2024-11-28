@@ -1,0 +1,35 @@
+# 使用 Node.js 18 Alpine 作为基础镜像
+FROM node:18-alpine
+
+# 设置工作目录
+WORKDIR /app
+
+# 复制 package.json 和 package-lock.json
+COPY package*.json ./
+
+# 安装依赖
+RUN npm install
+
+# 复制源代码
+COPY . .
+
+# 构建应用
+RUN npm run build
+
+# 确保配置文件在正确位置
+COPY public/config.js.template /app/dist/config.js
+RUN cat /app/dist/config.js
+
+# 复制启动脚本
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# 安装 serve 用于启动静态文件服务
+RUN npm install -g serve
+
+# 暴露端口
+EXPOSE 17777
+
+# 使用 serve 启动应用
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["serve", "-s", "dist", "-l", "17777"] 

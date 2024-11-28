@@ -1,0 +1,3 @@
+window._APP_CONFIG_ = {
+  apiBaseUrl: "{API_BASE_URL}"
+}; 

@@ -47,7 +47,7 @@
                       :auto-upload="false"
                       :show-file-list="false"
                       accept="image/*"
-                      @change="(file) => handleImageChange(file, index)"
+                      @change="(file: File) => handleImageChange(file, index)"
                     >
                       <el-button type="primary" plain>
                         <el-icon><Upload /></el-icon>
@@ -122,6 +122,8 @@ interface MaterialItem {
     text: string
     startTime: number
     endTime: number
+    beginTime: number
+    duration: number
   }
   imageUrl: string
   recommendImages: string[]
@@ -184,7 +186,7 @@ const initMaterials = async () => {
       }
     })
     
-    materials.value = data.caption_list.map(item => ({
+    materials.value = data.caption_list.map((item: any) => ({
       subtitle: {
         text: item.text,
         beginTime: item.begin_time,
@@ -198,7 +200,7 @@ const initMaterials = async () => {
     
     loading.value = false
   } catch (error) {
-    ElMessage.error('获取素材��败')
+    ElMessage.error('获取素材败')
     loading.value = false
   }
 }

@@ -67,3 +67,107 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## 快速启动
+
+### 本地开发
+```bash
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 构建生产版本
+npm run build
+```
+
+### Docker 快速启动
+
+1. **单行命令启动（使用默认配置）**
+```bash
+docker run -d --name audio-to-video -p 17777:17777 registry.cn-shenzhen.aliyuncs.com/okeeper/audio-to-video-vue:latest
+```
+
+2. **自定义 API 地址启动**
+```bash
+docker run -d --name audio-to-video \
+  -p 17777:17777 \
+  -e API_BASE_URL=http://your-api-server:17778 \
+  registry.cn-shenzhen.aliyuncs.com/okeeper/audio-to-video-vue:latest
+```
+
+3. **停止和删除容器**
+```bash
+# 停止容器
+docker stop audio-to-video
+
+# 删除容器
+docker rm audio-to-video
+```
+
+4. **查看容器日志**
+```bash
+# 查看实时日志
+docker logs -f audio-to-video
+
+# 查看最近100行日志
+docker logs --tail 100 audio-to-video
+```
+
+### 常见问题处理
+
+1. **端口冲突**
+如果 17777 端口被占用，可以修改映射端口：
+```bash
+docker run -d --name audio-to-video -p 18888:17777 ...
+```
+
+2. **容器自动重启**
+添加 --restart 参数：
+```bash
+docker run -d --name audio-to-video -p 17777:17777 --restart always ...
+```
+
+3. **查看容器状态**
+```bash
+docker ps | grep audio-to-video
+```
+
+## Docker 部署说明
+
+### 构建并推送镜像
+```bash
+# 添加执行权限
+chmod +x build-push.sh
+
+# 执行构建和推送脚本
+./build-push.sh
+```
+
+### 服务器部署
+```bash
+# 登录到 Docker 仓库
+docker login registry.cn-shenzhen.aliyuncs.com
+
+# 拉取镜像
+docker pull registry.cn-shenzhen.aliyuncs.com/okeeper/audio-to-video-vue:latest
+
+# 运行容器（使用默认 API 地址）
+docker run -d \
+  --name audio-to-video \
+  -p 17777:17777 \
+  --restart always \
+  registry.cn-shenzhen.aliyuncs.com/okeeper/audio-to-video-vue:latest
+
+# 或者指定自定义 API 地址
+docker run -d \
+  --name audio-to-video \
+  -p 17777:17777 \
+  -e API_BASE_URL=http://your-api-server:17778 \
+  --restart always \
+  registry.cn-shenzhen.aliyuncs.com/okeeper/audio-to-video-vue:latest
+```
+
+### 环境变量说明
+- `API_BASE_URL`: API 服务器地址，默认为 `http://localhost:17778`

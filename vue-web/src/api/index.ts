@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { getConfig } from '@/config'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000',
+  baseURL: getConfig().apiBaseUrl,
   timeout: 300000,
   headers: {
     'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ api.interceptors.response.use(
   }
 )
 
-interface VideoData {
+interface AudioData {
   url: string
   title?: string
 }
@@ -65,21 +66,21 @@ interface CaptionItem {
 }
 
 interface VideoRequest {
-  video_data: VideoData
+  audio_data: AudioData
   caption_list: CaptionItem[]
   bg_music_path?: string
-  clip_tmp_dir: string
 }
 
 interface VideoInfo {
   title?: string
+  url?: string
   duration?: number
   // 其他可能的视频信息字段
 }
 
 interface CaptionsResponse {
   caption_list: CaptionItem[]
-  video_info?: VideoInfo
+  audio_data?: VideoInfo
 }
 
 export const videoApi = {
@@ -93,7 +94,7 @@ export const videoApi = {
   // 获取推荐素材
   getImageMaterials(data: {
     caption_list: CaptionItem[]
-    video_data: VideoData
+    audio_data: AudioData
   }) {
     return api.post('/api/v1/image-materials', data, {
       timeout: 600000
@@ -120,7 +121,7 @@ export const videoApi = {
 
 // 导出类型定义
 export type {
-  VideoData,
+  AudioData,
   CaptionItem,
   VideoRequest,
   VideoInfo,

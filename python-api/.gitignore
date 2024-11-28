@@ -1,63 +1,26 @@
-# Python
+# Python缓存文件
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 
-# Virtual Environment
-venv/
-env/
-ENV/
+# 日志文件
+*.log
+
+# 临时文件
+tmp/
+.DS_Store
+
+# 环境文件
 .env
+.venv
+env/
+venv/
+ENV/
 
-# IDE
+# IDE配置文件
 .idea/
 .vscode/
 *.swp
-*.swo
-.DS_Store
 
-# Project specific
-logs/
-tmp/
-clip_tmp_*/
-*.log
-config.py
-!config.py.copy
-
-# Media files
-*.mp4
-*.mp3
-*.wav
-*.avi
-*.mov
-*.jpg
-*.jpeg
-*.png
-*.gif
-
-# Cache
-.cache/
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Local development
-local_settings.py
-db.sqlite3 
+# 配置文件
+src/config/config.py

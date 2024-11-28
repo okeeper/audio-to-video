@@ -3,9 +3,9 @@
     <el-card class="input-card">
       <template #header>
         <div class="card-header">
-          <h2 class="page-title">输入音频链接</h2>
+          <h2 class="page-title">输入视频网页地址链接</h2>
           <p class="description">
-            请输入有效的音频文件链接，支持MP3、WAV、M4A等格式
+            请输入有效的视频网页链接，视频连接支持抖音、快手、B站等平台
           </p>
         </div>
       </template>
@@ -14,7 +14,7 @@
         <el-form-item prop="videoUrl">
           <el-input
             v-model="form.videoUrl"
-            placeholder="请输入音频链接，例如：https://example.com/audio.mp3"
+            placeholder="请输入音频链接，例如：https://www.bilibili.com/video/BV1bG411p7Wy"
             clearable
             size="large"
             class="url-input"
@@ -41,9 +41,9 @@
       <div class="tips">
         <h3>使用说明：</h3>
         <ul>
-          <li>确保音频文件可以公开访问</li>
-          <li>建议音频时长在1-10分钟之间</li>
-          <li>音频质量将影响字幕识别准确度</li>
+          <li>确保视频网页地址可以公开访问</li>
+          <li>建议视频时长在1-10分钟之间,否则容易超时失败</li>
+          <li>视频视频质量将影响字幕识别准确度</li>
         </ul>
       </div>
     </el-card>
