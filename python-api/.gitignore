@@ -24,3 +24,5 @@ ENV/
 
 # 配置文件
 src/config/config.py
+output/
+logs/
